@@ -1,0 +1,27 @@
+{
+  "name": "piotrpress/elementor",
+  "type": "library",
+  "license": "MIT",
+  "description": "This library simplifies HTML elements rendering.",
+  "homepage": "https://piotr.press",
+  "authors": [
+    {
+      "name": "Piotr Niewiadomski",
+      "homepage": "https://github.com/PiotrPress"
+    }
+  ],
+  "keywords": [
+    "elementor", "html-element", "html-tag", "html-tags", "html-attribute", "html-attributes", "html-dom", "dom-element", "dom-node", "element", "elements", "attribute", "attributes"
+  ],
+  "require": {
+    "php": ">=7.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "PiotrPress\\": "src/"
+    },
+    "classmap": [
+      "src"
+    ]
+  }
+}
