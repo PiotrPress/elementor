@@ -2,31 +2,32 @@
 
 namespace PiotrPress;
 
-class Elementor {
-    protected string $name;
-    protected array $attributes;
-    protected ?string $content;
+use PiotrPress\Elementor\Element;
 
-    public function __construct( string $name, array $attributes = [], ?string $content = null ) {
-        $this->name = $name;
-        $this->attributes = $attributes;
-        $this->content = $content;
+class Elementor {
+    private array $data;
+
+    public function __construct( array $data ) {
+        $this->data = $data;
     }
 
     public function __toString() : string {
-        $attributes = $this->attributes;
-        \array_walk( $attributes, function( &$value, $key ) {
-            $value = \is_int( $key )
-                ? (string)$value
-                : \sprintf( '%s="%s"', $key, \htmlspecialchars( \implode( ' ', (array)$value ) ) );
-        } );
-        $attributes = \implode( ' ', $attributes );
-        $attributes = $attributes
-            ? " $attributes"
-            : '';
+        return self::render( $this->data );
+    }
 
-        return \is_null( $this->content )
-            ? "<$this->name$attributes />"
-            : "<$this->name$attributes>$this->content</$this->name>";
+    protected static function render( $data ) : string {
+        $output = '';
+        foreach( $data as $content )
+            switch( true ) {
+                case \is_string( $content[ 2 ] ?? null ) :
+                case \is_null( $content[ 2 ] ?? null ) :
+                    $output .= new Element( $content[ 0 ], $content[ 1 ] ?? [], $content[ 2 ] ?? null );
+                    break;
+                case \is_array( $content[ 2 ] ) :
+                    $output .= new Element( $content[ 0 ], $content[ 1 ] ?? [], self::render( $content[ 2 ] ) );
+                    break;
+                default : throw new \InvalidArgumentException( 'Invalid content type' );
+            }
+        return $output;
     }
 }

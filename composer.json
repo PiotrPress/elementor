@@ -3,11 +3,11 @@
   "type": "library",
   "license": "MIT",
   "description": "This library simplifies HTML elements rendering.",
-  "homepage": "https://piotr.press",
+  "homepage": "https://github.com/PiotrPress/elementor",
   "authors": [
     {
       "name": "Piotr Niewiadomski",
-      "homepage": "https://github.com/PiotrPress"
+      "homepage": "https://piotr.press"
     }
   ],
   "keywords": [
@@ -18,10 +18,9 @@
   },
   "autoload": {
     "psr-4": {
-      "PiotrPress\\": "src/"
+      "PiotrPress\\": "src/",
+      "PiotrPress\\Elementor\\": "src/"
     },
-    "classmap": [
-      "src"
-    ]
+    "classmap": [ "src" ]
   }
 }
